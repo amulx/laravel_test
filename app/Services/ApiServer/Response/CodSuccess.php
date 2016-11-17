@@ -25,15 +25,16 @@ class CodSuccess extends BaseResponse implements InterfaceResponse
     public function run(&$params)
     {
         //A 接收otms货物问题件信息
-        dd($params);
-
+        // dd($params);
+        // echo json_encode($params);exit();
+        \Log::info('cod.success接收到的参数是：'.var_export($params,true));
 
         //B 货物问题件信息发送到惠易定
         
         return [
             'status' => true,
             'code'   => '200',
-            'data'   => $lineData
+            'data'   => []
         ];
     }
 }
