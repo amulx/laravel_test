@@ -24,8 +24,50 @@ class DemandController extends Controller
         return $ret;
     }
     function test(Request $request){
-        Log::info('接收curl传过来的数据是'.var_export($request->input(),true));
-    	// dd($request->input());
+        //A 获取分类名称
+        // CREATE TABLE `laravel_class` (
+        //   `id` int(11) NOT NULL AUTO_INCREMENT,
+        //   `name` varchar(50) DEFAULT NULL,
+        //   PRIMARY KEY (`id`)
+        // ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+        $classData = DB::table('laravel_class')->where('id', rand(1,3))->first();
+        //B 找出分类的图片
+        // CREATE TABLE `laravel_code` (
+        //   `id` int(11) NOT NULL AUTO_INCREMENT,
+        //   `pic` varchar(255) DEFAULT NULL,
+        //   `class_id` int(11) DEFAULT NULL,
+        //   PRIMARY KEY (`id`)
+        // ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+        $codeData1 = DB::table('laravel_code')->where('class_id', $classData->id)->take(2)->get();
+        $request->session()->put('class_id', $classData->id);
+        $codeData2 = DB::table('laravel_code')->where('class_id', '<>',$classData->id)->take(4)->get();
+        $codeData = array_merge($codeData1,$codeData2);
+        shuffle($codeData);
+
+        return view('amutest.test',['imgData'=>$codeData,'class_name'=>$classData->name]);
+    }
+
+    function codeConfirm(Request $request){
+        if ($request->isMethod('POST')) {
+            $checkArray = $request->input('checkvalue');
+            if (count($checkArray) == 2) {
+                $classData = DB::table('laravel_code')->where('class_id', $request->session()->get('class_id'))->get();
+                foreach ($classData as $key => $value) {
+                    $id_array[] = $value->id;
+                }
+
+                if (count(array_intersect($checkArray, $id_array)) == 2) {//取出两个数组的交集
+                    return '验证成功';
+                }else{
+                    return '验证失败';
+                }
+
+            }else{
+                return '选择错误';
+            }
+  
+        }
+        
     }
 
     function cache1(){
