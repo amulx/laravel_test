@@ -23,6 +23,7 @@ Route::group(['prefix'=>'openapi','namespace'=>'YspInterface'], function () {
 	Route::any('cache2', ['as' => 'test', 'uses' => 'DemandController@cache2']);
 	Route::post('storeDemand', ['as' => 'storedemand', 'uses' => 'DemandController@storeDemand']);
 	Route::post('codeConfirm', ['as' => 'codeConfirm', 'uses' => 'DemandController@codeConfirm']);
+	Route::any('changeValue', ['as' => 'changeValue', 'uses' => 'DemandController@changeValue']);
 });
 // API 相关
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function(){

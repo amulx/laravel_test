@@ -66,8 +66,17 @@ class DemandController extends Controller
                 return '选择错误';
             }
   
-        }
-        
+        } 
+    }
+    //利用按位异或实现两个值的交换，而不必使用临时变量
+    function changeValue(){
+        $a=36;
+        $b=112; 
+        echo '交换前 $a:'.$a.',$b:'.$b.'<br />';
+        $a = $a^$b;//$a=111,$b=110 
+        $b = $b^$a;//$a=111,$b=001 
+        $a = $a^$b;//$a=110,$b=001 
+        echo '交换后$a:'.$a.',$b:'.$b.'<br />';
     }
 
     function cache1(){
