@@ -24,7 +24,7 @@ class DemandWarn extends BaseResponse implements InterfaceResponse
     public function run(&$params)
     {
         //A 接收otms货物问题件信息
-        dd($params);
+        // dd($params);
 
 
         //B 货物问题件信息发送到惠易定
@@ -32,7 +32,14 @@ class DemandWarn extends BaseResponse implements InterfaceResponse
         return [
             'status' => true,
             'code'   => '200',
-            'data'   => $lineData
+            'data'   => [
+                "eventTime" => "2015-08-12 13:44:54",       
+                "remark" => "order line Exception 破损总数:11;\nnull- test1: 破损: 11;\n", 
+                "orderNumber" => $params['transport_id'],    
+                "eventId" => 11139,       
+                "trackPlate" => "沪 A11113",       
+                "eventType" => 22
+            ]
         ];
     }
 }

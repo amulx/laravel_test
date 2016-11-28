@@ -31,8 +31,11 @@ class YspSignin extends BaseResponse implements InterfaceResponse
             'status' => true,
             'code'   => '200',
             'data'   => [
-                'employno' => $params['employno'],
-                'passwd' => $params['passwd']
+                'employname' => '员工的真是姓名',
+                'netcode' => '该员工所属的网点编号',
+                'netname' => '网点名称',
+                'mobile'=>'13838381438',
+                'exceptioncodeversion'=>'V1.0'
             ],
         ];
     }

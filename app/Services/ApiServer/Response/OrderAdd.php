@@ -30,11 +30,12 @@ class OrderAdd extends BaseResponse implements InterfaceResponse
             $lineData = DB::table('fast_line')
             ->where('f_provice', '=', $value['f_province'])
             ->where('f_city', '=', $value['f_city'])
-            // ->where('f_area', '=', $value->area)
+            ->where('f_area', '=', $value['f_area'])
             ->where('t_provice', '=', $value['t_province'])
             ->where('t_city', '=', $value['t_city'])
-            // ->where('t_area', '=', $value['t_area'])
+            ->where('t_area', '=', $value['t_area'])
             ->first();
+            // dd($lineData);
             // echo $lineData->merchant_collection;exit();
                 // 线路id为
             $postData[$key]['line_id'] = $lineData->line_id;

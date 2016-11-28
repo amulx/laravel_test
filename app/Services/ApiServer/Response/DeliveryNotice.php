@@ -37,7 +37,6 @@ class DeliveryNotice extends BaseResponse implements InterfaceResponse
                 'code' => 200,
                 'status' => true,
                 'data' => $orderData,
-                'msg' => '接收成功'
             ];
         // $result = $this->SendDataByCurl($hyd_url,$notify_msg);
 
